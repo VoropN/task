@@ -3,11 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TasksComponent } from './tasks.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
-import { TaskStatus } from 'src/models/task-status';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { tasksMock } from 'src/models/tasks-mock-data';
+import { tasksMock } from '../../models/tasks-mock-data';
 
 describe('TasksComponent', () => {
   let component: TasksComponent;
@@ -34,4 +33,5 @@ describe('TasksComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { TaskRepository } from "../../models/task-repository";
@@ -25,9 +25,14 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   setHeight(): void {
-    if (this.textArea.nativeElement.scrollHeight != this.textArea.nativeElement.offsetHeight - 10) {
+    if (this.textArea && this.textArea.nativeElement &&
+      this.textArea.nativeElement.scrollHeight != this.textArea.nativeElement.offsetHeight - 10) {
       this.textArea.nativeElement.style.height = this.textArea.nativeElement.scrollHeight - 10 + 'px';
     }
+  }
+
+  goBack(): void {
+    this.location.back()
   }
 
   initiateTaskDetails(): void {
