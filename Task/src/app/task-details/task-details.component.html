@@ -1,13 +1,38 @@
 <div class="task-group">
 
-  <div class="task-group__item" ><textarea #txt [(ngModel)]="tasksDetails.name" (ngModelChange)="setHeight()" (click)="setHeight()" ></textarea></div>
-  <!-- <div class="task-group__item" [(innerText)]='tasksDetails.name' contenteditable="true"></div> -->
-  <div class="task-group__item">{{ tasksDetails.id }}</div>
-  <div class="task-group__item">{{ tasksDetails.creation_date | date: 'short' }}</div>
-  <div class="task-group__item">{{ tasksDetails.start_date | date: 'short' }}</div>
-  <div class="task-group__item">{{ tasksDetails.due_date | date: 'short' }}</div>
-  <div class="task-group__item">{{ tasksDetails.physical_progress }}</div>
-  <div class="task-group__item">{{ tasksDetails.actual_effort }}</div>
-  <div class="task-group__item">{{ tasksDetails.estimated_effort }}</div>
-  <div class="task-group__item">{{ tasksDetails.description }}</div>
+  <div class="task-group__col">
+    <textarea class="task-group__name" #txt [(ngModel)]="tasksDetails.name" (blur)="taskNameChanged()" [defaultValue]="setHeight()"></textarea>
+  </div>
+  <div class="task-group__col">
+    <div class="task-group__title">ID: </div>
+    <div class="task-group__item">{{ tasksDetails.id }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.creation_date">
+    <div class="task-group__title">Date create: </div>
+    <div class="task-group__item">{{ tasksDetails.creation_date | date: 'medium' }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.start_date">
+    <div class="task-group__title">Date start: </div>
+    <div class="task-group__item">{{ tasksDetails.start_date | date: 'medium' }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.due_date">
+    <div class="task-group__title">Date due: </div>
+    <div class="task-group__item">{{ tasksDetails.due_date | date: 'medium' }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.physical_progress">
+      <div class="task-group__title">Progress: </div>
+      <div class="task-group__item">{{ tasksDetails.physical_progress }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.actual_effort">
+      <div class="task-group__title">Actual effort: </div>
+      <div class="task-group__item">{{ tasksDetails.actual_effort }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.estimated_effort">
+      <div class="task-group__title">Estimated effort: </div>
+      <div class="task-group__item">{{ tasksDetails.estimated_effort }}</div>
+  </div>
+  <div class="task-group__col" *ngIf="tasksDetails.description">
+      <div class="task-group__title">Description: </div>
+      <div class="task-group__item">{{ tasksDetails.description }}</div>
+  </div>
 </div>

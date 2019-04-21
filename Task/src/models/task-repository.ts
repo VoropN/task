@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import * as taskData from "./tasks.json";
+import { Injectable, Inject } from "@angular/core";
 import { TaskStatus } from "./task-status";
 import { ITask } from "./task.model";
 
@@ -8,10 +7,9 @@ import { ITask } from "./task.model";
     providedIn: 'root'
 })
 export class TaskRepository {
-    private tasks: ITask[];
     
-    constructor (private http: HttpClient) {
-        this.tasks = taskData.default;
+    constructor (@Inject('TASK_SOURCE') private tasks: ITask[], private http: HttpClient) {
+      //  this.tasks = taskData.default;
     }
 
     getActiveTasks(): ITask[] {
@@ -24,5 +22,11 @@ export class TaskRepository {
     getTaskById(id: number): ITask {
         return this.tasks &&
                 this.tasks.find(task => task.id === id)
+    }
+
+    updateTask(task: ITask) {
+        this.http.put<ITask>('api/task', task).subscribe(
+            task => console.log('successfully updated ', task),
+            error => console.log('error ' , error));
     }
 }

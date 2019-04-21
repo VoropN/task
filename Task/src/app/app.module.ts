@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import * as taskData from "../models/tasks.json";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ { provide: 'TASK_SOURCE', useValue: taskData.default }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
