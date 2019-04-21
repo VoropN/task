@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TaskRepository } from "../../models/task-repository";
 import { ITask } from "../../models/task.model";
 
@@ -7,14 +7,10 @@ import { ITask } from "../../models/task.model";
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.sass']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent {
   public activeTasks: ITask[];
 
-  constructor(private taskRepository: TaskRepository) { 
+  constructor(private taskRepository: TaskRepository) {
     this.activeTasks = taskRepository.getActiveTasks();
-   }
-
-  ngOnInit() {
   }
-
 }

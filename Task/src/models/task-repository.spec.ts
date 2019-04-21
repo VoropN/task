@@ -1,28 +1,27 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { TaskRepository } from './task-repository';
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TaskStatus } from './task-status';
+import { ITask } from './task.model';
+import { tasksMock } from './tasks-mock-data';
 
-fdescribe('Task repository', () => {
+describe('Task repository', () => {
     let taskRepository: TaskRepository;
+    let httpTestingController: HttpTestingController;
 
     beforeEach(() => {
-        const tasks = [{ id: 1, obj_status: TaskStatus.ACTIVE },
-        { id: 2, obj_status: TaskStatus.DELETED },
-        { id: 3, obj_status: TaskStatus.TRASHED },
-        { id: 4, obj_status: TaskStatus.ACTIVE }];
-
         TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule
             ],
             providers: [
-                { provide: 'TASK_SOURCE', useValue: tasks },
+                { provide: 'TASK_SOURCE', useValue: tasksMock },
                 TaskRepository
             ]
         });
 
         taskRepository = TestBed.get(TaskRepository);
+        httpTestingController = TestBed.get(HttpTestingController);
     });
 
     it('expect task repository to be defined', () => {
@@ -37,4 +36,20 @@ fdescribe('Task repository', () => {
         expect(tasks.length).toEqual(2);
         expect(taskIds).toEqual([1, 4]);
     });
+
+    it('should make one put request to update task', () => {
+        const task: ITask = { id: 1, obj_status: TaskStatus.DELETED } as ITask;
+        taskRepository.updateTask(task);
+        const req = httpTestingController.expectOne('api/task');
+        
+        expect(req.request.method).toEqual('PUT');
+    });
+
+    it('should find task by id', () => {
+        const id: number = 1;
+        const tasksDetails = taskRepository.getTaskById(id);
+
+        expect(tasksDetails).toBeDefined();
+        expect(tasksDetails.id).toEqual(id);
+    })
 });

@@ -7,26 +7,24 @@ import { ITask } from "./task.model";
     providedIn: 'root'
 })
 export class TaskRepository {
-    
-    constructor (@Inject('TASK_SOURCE') private tasks: ITask[], private http: HttpClient) {
-      //  this.tasks = taskData.default;
-    }
+
+    constructor(@Inject('TASK_SOURCE') private tasks: ITask[], private http: HttpClient) { }
 
     getActiveTasks(): ITask[] {
         return (
             this.tasks &&
-                this.tasks.filter(task => task.obj_status === TaskStatus.ACTIVE)
+            this.tasks.filter(task => task.obj_status === TaskStatus.ACTIVE)
         );
     }
 
     getTaskById(id: number): ITask {
         return this.tasks &&
-                this.tasks.find(task => task.id === id)
+            this.tasks.find(task => task.id === id)
     }
 
     updateTask(task: ITask) {
         this.http.put<ITask>('api/task', task).subscribe(
             task => console.log('successfully updated ', task),
-            error => console.log('error ' , error));
+            error => console.log('error ', error));
     }
 }

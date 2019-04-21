@@ -21,7 +21,7 @@ import * as taskData from "../models/tasks.json";
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ { provide: 'TASK_SOURCE', useValue: taskData.default }],
+  providers: [{ provide: 'TASK_SOURCE', useValue: taskData.default }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

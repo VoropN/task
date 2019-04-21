@@ -5,3 +5,19 @@ nav
     margin: 20px 0
     *
         padding-left: 10px
+
+$mediaBp: (1100px, 900px, 640px, 480px)
+.container
+    width: 100%
+    max-width: nth($mediaBp, 1)
+    padding:
+        left: 20px
+        right: 20px
+    margin:
+        left: auto
+        right: auto
+
+@for $i from 1 to length($mediaBp)
+    @media ( max-width: nth($mediaBp, $i) )
+        .container
+            max-width: nth($mediaBp, $i + 1)
