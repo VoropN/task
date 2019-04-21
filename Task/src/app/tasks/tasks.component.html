@@ -1,0 +1,18 @@
+<div class="table">
+  <div class="task-grid">
+    <h4 class="task-grid__col task-grid__title">№</h4>
+    <h4 class="task-grid__col task-grid__title">Name task</h4>
+    <h4 class="task-grid__col task-grid__title">Tags</h4>
+    <h4 class="task-grid__col task-grid__title">Actual effort</h4>
+    <h4 class="task-grid__col task-grid__title">Estimated effort</h4>
+  </div>
+  <ul class="task-grid" *ngFor="let task of activeTasks; let i = index" 
+    [class.task-grid__is_high_priority]="task.is_high_priority"
+    routerLink="/detail/{{task.id}}">
+    <li class="task-grid__col task-grid__nomer">{{i + 1}}</li>
+    <li class="task-grid__col task-grid__name">{{task.name}}</li>
+    <li class="task-grid__col task-grid__tags">{{task.tags}}</li>
+    <li class="task-grid__col task-grid__estimated_effort">{{task.estimated_effort}}</li>
+    <li class="task-grid__col task-grid__due_date">{{ task.due_date | date: 'short' }}</li>
+  </ul>
+</div>
